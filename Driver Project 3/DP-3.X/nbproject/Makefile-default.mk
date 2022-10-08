@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c IOs.c TimeDelay.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c IOs.c TimeDelay.c ChangeClk.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/TimeDelay.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/IOs.o.d ${OBJECTDIR}/TimeDelay.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/TimeDelay.o ${OBJECTDIR}/ChangeClk.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/IOs.o.d ${OBJECTDIR}/TimeDelay.o.d ${OBJECTDIR}/ChangeClk.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/TimeDelay.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/TimeDelay.o ${OBJECTDIR}/ChangeClk.o
 
 # Source Files
-SOURCEFILES=main.c IOs.c TimeDelay.c
+SOURCEFILES=main.c IOs.c TimeDelay.c ChangeClk.c
 
 
 
@@ -113,6 +113,12 @@ ${OBJECTDIR}/TimeDelay.o: TimeDelay.c  .generated_files/flags/default/97ac5cf229
 	@${RM} ${OBJECTDIR}/TimeDelay.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  TimeDelay.c  -o ${OBJECTDIR}/TimeDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/TimeDelay.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/ChangeClk.o: ChangeClk.c  .generated_files/flags/default/4908b592d1c15aec475d35e5bcaf387b203615f8 .generated_files/flags/default/c124c5018d818f221a3ce0a70487f5e9b64b7468
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ChangeClk.o.d 
+	@${RM} ${OBJECTDIR}/ChangeClk.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ChangeClk.c  -o ${OBJECTDIR}/ChangeClk.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ChangeClk.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/d188c7c663e33ff3b92d6b67891fa7cc9948c47b .generated_files/flags/default/c124c5018d818f221a3ce0a70487f5e9b64b7468
 	@${MKDIR} "${OBJECTDIR}" 
@@ -131,6 +137,12 @@ ${OBJECTDIR}/TimeDelay.o: TimeDelay.c  .generated_files/flags/default/7f1a7e3f3a
 	@${RM} ${OBJECTDIR}/TimeDelay.o.d 
 	@${RM} ${OBJECTDIR}/TimeDelay.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  TimeDelay.c  -o ${OBJECTDIR}/TimeDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/TimeDelay.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/ChangeClk.o: ChangeClk.c  .generated_files/flags/default/453cdfadf098a26381030773fce2e8b2572b3473 .generated_files/flags/default/c124c5018d818f221a3ce0a70487f5e9b64b7468
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ChangeClk.o.d 
+	@${RM} ${OBJECTDIR}/ChangeClk.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ChangeClk.c  -o ${OBJECTDIR}/ChangeClk.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ChangeClk.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

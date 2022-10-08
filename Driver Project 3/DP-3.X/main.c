@@ -5,13 +5,16 @@
  * Created on January 9, 2017, 5:26 PM
  */
 
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "xc.h"
 #include <p24fxxxx.h>
 #include <p24F16KA101.h>
-#include <stdio.h>
 #include <math.h>
 #include <errno.h>
+#include "main.c"
+#include "TimeDelay.c"
+#include "IOs.c"
 
 
 //// CONFIGURATION BITS - PRE-PROCESSOR DIRECTIVES ////
@@ -58,18 +61,16 @@
 #pragma config DSWDTPS = DSWDTPS7 // DSWDT postscaler set to 32768 
 
 
-// GLOBAL VARIABLES
-
-
-
 // MACROS
-#define Nop() {__asm__ volatile ("nop");}
-#define ClrWdt() {__asm__ volatile ("clrwdt");}
-#define Sleep() {__asm__ volatile ("pwrsav #0");}   // set sleep mode
-#define Idle() {__asm__ volatile ("pwrsav #1");}
+#define Nop() {__asm__ volatile ("nop");} // no operation
+#define ClrWdt() {__asm__ volatile ("clrwdt");} // timers that reset every user defined time
+#define Sleep() {__asm__ volatile ("pwrsav #0");}   // set sleep mode, CPU OFF - SOME PERIPHERALS ON
+#define Idle() {__asm__ volatile ("pwrsav #1");} // iddle mode, CPU OFF - PERIPHERALS ON
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");}
 
+// GLOBAL VARIABLES
 
+uint8_t CNflag = 0;
 
 
         
@@ -82,11 +83,24 @@ int main(void) {
      REFOCONbits.ROSEL = 0; // Output base clk showing clock switching
      REFOCONbits.RODIV = 0b0000;
      
-     //IO Inititalizations
-     AD1PCFG = 0xFFFF;  // Turn all analog pins to digital
+    //IO Inititalizations
+    AD1PCFG = 0xFFFF;  // Turn all analog pins to digital
+     
+    NewClk(32);  // 32 for 32 kHz
+    IOinit(); // Enables IO and CN interrupts on push buttons
+    
     
     while(1)  // infinite while loop
      {
+        if (CNflag == 1) // Check to see if flag is 1 for Change of Notification Interrupt
+        {
+            CNflag = 0; // Check the Change of Notification (Check if a push button was pressed)
+            IOcheck();    // Checks push button state to turn LED ON
+        }
+        
+        LATBbits.LATB8 = 0; // Turn OFF LED
+        Idle(); //Turn CPU off, consumes little power
+        
         
         
                   
