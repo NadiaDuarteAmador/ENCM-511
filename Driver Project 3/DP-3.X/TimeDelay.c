@@ -5,11 +5,13 @@
  * Created on October 4, 2022, 5:29 PM
  */
 
+#include "TimeDelay.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
 #include "ChangeClk.h"
 #include "IOs.h"
+#include "xc.h"
+
 
 /*
  * 

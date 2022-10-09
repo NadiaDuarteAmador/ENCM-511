@@ -12,9 +12,11 @@
 #include <p24F16KA101.h>
 #include <math.h>
 #include <errno.h>
-#include "ChangeClk.c"
-#include "TimeDelay.c"
-#include "IOs.c"
+#include "IOs.h"
+#include "ChangeClk.h"
+#include "TimeDelay.h"
+
+
 
 
 /*

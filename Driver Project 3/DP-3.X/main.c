@@ -12,9 +12,9 @@
 #include <p24F16KA101.h>
 #include <math.h>
 #include <errno.h>
-#include "main.c"
-#include "TimeDelay.c"
-#include "IOs.c"
+#include "TimeDelay.h"
+#include "IOs.h"
+#include "Changeclk.h"
 
 
 //// CONFIGURATION BITS - PRE-PROCESSOR DIRECTIVES ////

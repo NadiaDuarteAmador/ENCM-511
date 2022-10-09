@@ -7,9 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-//#include "ChangeClk.h"
-//#include "TimeDelay.h"
-//#include "IOs.h"
+#include "ChangeClk.h"
+#include "TimeDelay.h"
+#include "IOs.h"
 #include "xc.h"
 
 void NewClk(unsigned int clkval)  
