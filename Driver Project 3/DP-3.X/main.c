@@ -12,9 +12,10 @@
 #include <p24F16KA101.h>
 #include <math.h>
 #include <errno.h>
-#include "main.c"
-#include "TimeDelay.c"
-#include "IOs.c"
+
+#include "TimeDelay.h"
+#include "IOs.h"
+#include "ChangeClk.h"
 
 
 //// CONFIGURATION BITS - PRE-PROCESSOR DIRECTIVES ////
@@ -70,7 +71,7 @@
 
 // GLOBAL VARIABLES
 
-uint8_t CNflag = 0;
+ uint8_t CNflag = 0;
 
 
         
@@ -83,14 +84,14 @@ int main(void) {
      REFOCONbits.ROSEL = 0; // Output base clk showing clock switching
      REFOCONbits.RODIV = 0b0000;
      
-    //IO Inititalizations
+    //IO Initializations
     AD1PCFG = 0xFFFF;  // Turn all analog pins to digital
      
-    NewClk(32);  // 32 for 32 kHz
+    NewClk(32);  // 32 kHz
     IOinit(); // Enables IO and CN interrupts on push buttons
     
-    
-    while(1)  // infinite while loop
+    // Initialize IOs for low-power wake-up
+    while(1)  // Infinite while loop
      {
         if (CNflag == 1) // Check to see if flag is 1 for Change of Notification Interrupt
         {
@@ -98,11 +99,8 @@ int main(void) {
             IOcheck();    // Checks push button state to turn LED ON
         }
         
-        LATBbits.LATB8 = 0; // Turn OFF LED
-        Idle(); //Turn CPU off, consumes little power
-        
-        
-        
+        LATBbits.LATB8 = 0; // Turn LED Off if no push button was pressed
+        Idle(); // Turn CPU off, consumes little power   
                   
      }
     return 0;

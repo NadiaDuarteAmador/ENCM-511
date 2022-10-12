@@ -5,11 +5,7 @@
  * Created on October 5, 2022, 7:23 AM
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-//#include "ChangeClk.h"
-//#include "TimeDelay.h"
-//#include "IOs.h"
+#include "ChangeClk.h"
 #include "xc.h"
 
 void NewClk(unsigned int clkval)  
