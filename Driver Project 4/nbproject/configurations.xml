@@ -40,7 +40,7 @@
         <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.00</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="PIC24F-KA-KL-KM_DFP" vendor="Microchip" version="1.4.83"/>
@@ -328,6 +328,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-2bff"/>
         <property key="poweroptions.powerenable" value="true"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Users/Justin/Desktop/ENSF409/Project/ENCM-511/Driver Project 4/debug/default/DP-3_ptg"/>
         <property key="programmerToGoImageName" value="DP-3_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

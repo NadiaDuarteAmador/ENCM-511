@@ -95,7 +95,6 @@ int main(void) {
     // Initialize IOs for low-power wake-up
     while(1)  // Infinite while loop
      {
-     
         IOcheck(); 
         Idle(); // Turn CPU off, consumes little power   
                   

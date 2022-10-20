@@ -6,5 +6,5 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=DP-4.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/DP-4.X.production.hex
+CND_ARTIFACT_NAME_default=Driver_Project_4.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/Driver_Project_4.production.hex

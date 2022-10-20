@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DP-4.X
+PROJECTNAME=Driver Project 4
 
 # Active Configuration
 DEFAULTCONF=default

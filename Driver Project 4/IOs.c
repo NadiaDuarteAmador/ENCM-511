@@ -15,7 +15,7 @@
 #include "TimeDelay.h"
 
 extern uint8_t CNflag; // Global variable CNflag in main.c
-uint8_t x;
+uint8_t x = 4;
 
 /*
  * 
@@ -59,13 +59,18 @@ while (1)
     
    uint8_t PBsPressed = PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4; // Counts how many Push Buttons are being pressed. (0 = All, 1 = Two, 2 = One, 3 = None)
         
-   LATBbits.LATB8 = 0;
+ //  LATBbits.LATB8 = 0;
         if (x == 4) // No Push Buttons are pressed
         {
             LATBbits.LATB8 = 0; // LED Off
             Disp2String("\n\rNothing pressed\n");
         }
-        if (PBsPressed <= 1) // At least two PBs are pressed at the exact same time
+        if (x == 3) // All PBs are pressed together
+        {
+            Disp2String("\n\rAll PBs pressed\n");
+            LATBbits.LATB8 = 1; // LED On 
+        }  
+        else if (PBsPressed <= 1) // At least two PBs are pressed at the exact same time
         {
             if (x == 5) // If only PB1 and PB2 are pressed
             {
@@ -82,11 +87,7 @@ while (1)
             
             LATBbits.LATB8 = 1; // LED On
         }
-        if (x == 3) // All PBs are pressed together
-        {
-            Disp2String("\n\rAll PBs pressed\n");
-            LATBbits.LATB8 = 1; // LED On 
-        }   
+        
         else if (x == 0) // While PB1 is pressed
         {
             Disp2String("\n\rPB1 is pressed\n");
