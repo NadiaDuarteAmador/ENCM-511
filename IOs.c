@@ -1,7 +1,7 @@
 /* 
  * File:   IOs.c
  * Author: nadia
- *
+ * DP 5
  * Created on October 4, 2022, 5:28 PM
  */
 
@@ -13,6 +13,8 @@
 #include "IOs.h"
 #include "UART2.h"
 #include "TimeDelay.h"
+
+
 
 extern uint8_t CNflag; // Global variable CNflag in main.c
 uint8_t x = 0; // X is a counter for what buttons are being pressed. 0 inital state
@@ -61,7 +63,7 @@ while (1)
 {  
     if (x == 0) // None PBs are pressed
     {       
-    LATBbits.LATB8 = 0; // LED Off
+        LATBbits.LATB8 = 0; // LED Off
     }
     
     else if (x == 1) // PB1 is pressed
@@ -138,11 +140,13 @@ while (1)
         x = 0; // Back to initial state
         
     }
+   
     
     else if (x == 3) // PB3 pressed for less than 3s
     {
         if (start_pause == 1)
         {
+            LATBbits.LATB8 = 1;  // LED On
             seconds = seconds - 1; // Decrement ever second in timer 
             // 1s delay blinking in LED
             LATBbits.LATB8 = 1;  // LED On
@@ -197,7 +201,7 @@ void __attribute__((interrupt, no_auto_psv))_CNInterrupt(void)
     if(IFS1bits.CNIF ==1){  
         
         //Check the state of each button when the interrupt is triggered to filter debounce effect in buttons
-         uint16_t seconds_counter = 0;
+         //uint16_t seconds_counter = 0;
        
 
             if((PORTAbits.RA2 == 0) && (PORTBbits.RB4 == 1) && (PORTAbits.RA4 == 1)) // PB1 pressed
@@ -208,21 +212,26 @@ void __attribute__((interrupt, no_auto_psv))_CNInterrupt(void)
             {
                 x = 2;
             }
-            else if ((PORTAbits.RA2 == 1) && (PORTBbits.RB4 == 1) && (PORTAbits.RA4 == 0) && (x != 3) && (x != 4)) // While PB3 pressed only and x is in its initial state 
-            {
-                seconds_counter = seconds_counter + 1; // Count the seconds PB3 is being pressed
+            while ((PORTAbits.RA2 == 1) && (PORTBbits.RB4 == 1) && (PORTAbits.RA4 == 0) /*&& (x != 3) && (x != 4)*/) // While PB3 pressed only and x is in its initial state 
+            {               
+                while (1){
+                    if ((PORTAbits.RA4 == 1))   delay_ms(3000);
+                    if ((PORTAbits.RA4 == 1)){                         
+                            x = 4; // PB3 pressed for more than 3s
+                            break;
+                    }
+                    else{ 
+                        x = 3;  // PB3 pressed for less than 3s
+                        break;
+                    }
+                }         
                 
-                Disp2Dec(minutes);  // The following 4 lines will print "<minutes>m: <seconds>s"
-                Disp2String("m : ");
-                Disp2Dec(seconds);
-                Disp2String("s");
-                XmitUART2('\r', 1); // Jump next line
-              
-                if ((PORTAbits.RA4 == 1) && (seconds_counter >= 3)) // If PB3 is pressed for more than 3s
-                {
-                    x = 4; // PB3 pressed for more than 3s
-                }
                 
+                    
+
+             
+
+/*                
                 else if ((PORTAbits.RA4 == 1) && (seconds_counter  < 3)) 
                 {
                     x = 3; // PB3 pressed for less than 3s
@@ -239,13 +248,15 @@ void __attribute__((interrupt, no_auto_psv))_CNInterrupt(void)
                 
                 if (seconds == 0) // when seconds reach 0 re start count to 60 for the next min
                 {
-                   seconds = 60;
+                   seconds = 59;
                 }
-                }
-       //     else if ((PORTAbits.RA2 == 1) && (PORTBbits.RB4 == 1) && (PORTAbits.RA4 == 1)) // None pressed
-         //   {
-           //     x = 0; // initial state
-            //}        
+*/ 
+            }
+
+           /* else if ((PORTAbits.RA2 == 1) && (PORTBbits.RB4 == 1) && (PORTAbits.RA4 == 1)) // None pressed
+            {
+                x = 0; // initial state
+            }      */  
          
          }
     
