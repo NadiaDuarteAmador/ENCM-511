@@ -30,6 +30,9 @@
 // more than once.  
 #ifndef XC_HEADER_TEMPLATE_H
 #define	XC_HEADER_TEMPLATE_H
+uint16_t do_ADC(void);
+void display_graph(uint16_t ADC_VALUE);
+
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 

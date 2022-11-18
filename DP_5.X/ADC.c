@@ -11,7 +11,7 @@
 #include "ADC.h"
 
 
-   uint16_t ADCvalue; // 16 bit register used to hold ADC converted digital output ADC1BUF0
+uint16_t ADCvalue; // 16 bit register used to hold ADC converted digital output ADC1BUF0
 
 uint16_t do_ADC(void) 
 {    
@@ -81,18 +81,23 @@ void display_graph(uint16_t ADC_VALUE)
     
     // To draw the graph
     
-    uint16_t length_max = 40; // Let max length of bar is 40
+    uint16_t length_max = 60; // Let max length of bar is 60
 
-    uint16_t length_bar = ADC_VALUE * 40 / 1024; // Voltage level formula, scaler
+    uint16_t length_bar = ADC_VALUE * 60 / 1024; // Voltage level formula, scaler
+    
+    if (ADC_VALUE == 1024)
+    {
+        ADC_VALUE = 1024; // when bar length max is reached
+    }
     
     XmitUART2('=', length_bar); // Width of bar changes in proportion to adc's digital output
     XmitUART2(' ', length_max - length_bar); // next line
-    XmitUART2('|', 1); // next line
     
     Disp2Hex(ADC_VALUE); // Display adc digital output value in HEX at the end of bar on pic terminal
     Disp2String("\r");  // jump line
     
     NewClk(32); // Set clk back to 32kHz
+   
     
-    return ADC_VALUE
+    return ADC_VALUE;
 }
